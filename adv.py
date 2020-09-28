@@ -37,7 +37,6 @@ def single_traverse():
     rooms = [room for room in mapped_rooms]
 
     while len(visited) < len(room_graph) - 1:
-        # print(rooms[0])
         path = graph.bfs(rooms[0], rooms[1])
 
         while len(path) > 1:
@@ -53,27 +52,7 @@ def single_traverse():
 single_traverse()
 
 
-def traverse():
-    graph = Graph()
-    visited = set()
-    test_path = list()
-    mapped_rooms = graph.dft(player.current_room)
-    rooms = [room for room in mapped_rooms]
 
-    while len(visited) < len(room_graph) - 1:
-        # print(rooms[0])
-        path = graph.bfs(rooms[0], rooms[1])
-
-        while len(path) > 1:
-            cur_room = path[0]
-            adj_room = path[1]
-            if adj_room in mapped_rooms[cur_room]:
-                test_path.append(mapped_rooms[cur_room][adj_room])
-            path.remove(cur_room)
-        rooms.remove(rooms[0])
-        visited.add(rooms[0])
-
-    return test_path
 
 
 
