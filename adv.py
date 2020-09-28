@@ -1,6 +1,7 @@
 from room import Room
 from player import Player
 from world import World
+from util import Graph
 
 import random
 from ast import literal_eval
@@ -28,6 +29,52 @@ player = Player(world.starting_room)
 # Fill this out with directions to walk
 # traversal_path = ['n', 'n']
 traversal_path = []
+
+def single_traverse():
+    graph = Graph()
+    visited = set()
+    mapped_rooms = graph.dft(player.current_room)
+    rooms = [room for room in mapped_rooms]
+
+    while len(visited) < len(room_graph) - 1:
+        # print(rooms[0])
+        path = graph.bfs(rooms[0], rooms[1])
+
+        while len(path) > 1:
+            cur_room = path[0]
+            adj_room = path[1]
+            if adj_room in mapped_rooms[cur_room]:
+                traversal_path.append(mapped_rooms[cur_room][adj_room])
+            path.remove(cur_room)
+        rooms.remove(rooms[0])
+        visited.add(rooms[0])
+
+
+single_traverse()
+
+
+def traverse():
+    graph = Graph()
+    visited = set()
+    test_path = list()
+    mapped_rooms = graph.dft(player.current_room)
+    rooms = [room for room in mapped_rooms]
+
+    while len(visited) < len(room_graph) - 1:
+        # print(rooms[0])
+        path = graph.bfs(rooms[0], rooms[1])
+
+        while len(path) > 1:
+            cur_room = path[0]
+            adj_room = path[1]
+            if adj_room in mapped_rooms[cur_room]:
+                test_path.append(mapped_rooms[cur_room][adj_room])
+            path.remove(cur_room)
+        rooms.remove(rooms[0])
+        visited.add(rooms[0])
+
+    return test_path
+
 
 
 
